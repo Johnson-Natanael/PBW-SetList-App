@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Reports</title>
+    <!-- Include your CSS files here -->
+</head>
+<body>
+    <h1>Admin Reports</h1>
+    <h2>Number of Users by Role</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Role</th>
+                <th>Number of Users</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="report : ${roleReports}">
+                <td th:text="${report.roleName}">ROLE_USER</td>
+                <td th:text="${report.userCount}">10</td>
+            </tr>
+        </tbody>
+    </table>
+    <p><a th:href="@{/admin}">Back to Dashboard</a></p>
+</body>
+</html>

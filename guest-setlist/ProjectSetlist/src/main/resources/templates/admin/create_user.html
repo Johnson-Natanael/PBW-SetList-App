@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create User</title>
+    <!-- Include your CSS files here -->
+</head>
+<body>
+    <h1>Create New User</h1>
+    <form th:action="@{/admin/users/create}" th:object="${user}" method="post">
+        <div>
+            <label>Username:</label>
+            <input type="text" th:field="*{username}" required />
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</div>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" th:field="*{email}" required />
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" th:field="*{password}" required />
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+        </div>
+        <div>
+            <label>Roles:</label>
+            <div th:each="role : ${roles}">
+                <input type="checkbox" th:value="${role.id}" name="roleIds" th:id="'role_' + ${role.id}" />
+                <label th:for="'role_' + ${role.id}" th:text="${role.name}">ROLE_USER</label>
+            </div>
+        </div>
+        <div>
+            <button type="submit">Create User</button>
+            <a th:href="@{/admin/users}">Cancel</a>
+        </div>
+    </form>
+</body>
+</html>

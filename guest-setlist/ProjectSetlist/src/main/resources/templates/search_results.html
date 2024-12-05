@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Results</title>
+</head>
+<body>
+    <h1>Search Results for "<span th:text="${query}"></span>"</h1>
+    <p><a th:href="@{/}">Back to Home</a></p>
+
+    <div th:if="${#lists.isEmpty(shows)}">
+        <p>No shows found.</p>
+    </div>
+    <ul th:unless="${#lists.isEmpty(shows)}">
+        <li th:each="show : ${shows}">
+            <!-- Nama artis mengarah ke halaman login -->
+            <a th:href="@{/login}" th:text="${show.artist.name}"></a> - 
+            <!-- Show mengarah ke setlist berdasarkan ID show -->
+            <a th:href="@{/setlist/{showId}(showId=${show.id})}" th:text="${show.date} + ' - ' + ${show.venue} + ', ' + ${show.city} + ', ' + ${show.country}"></a>
+        </li>
+    </ul>
+</body>
+</html>
