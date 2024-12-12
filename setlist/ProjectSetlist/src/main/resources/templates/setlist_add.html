@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Setlist</title>
+    <!-- Include CSS files -->
+</head>
+<body>
+    <h1>Add Setlist for Show on <span th:text="${setlist.show.date}"></span></h1>
+    <form th:action="@{/setlists/add}" th:object="${setlist}" method="post" enctype="multipart/form-data">
+        <!-- CSRF Token -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <!-- Hidden field for show ID -->
+        <input type="hidden" name="show.id" th:value="${setlist.show.id}" />
+
+        <div>
+            <label>Songs (one per line):</label>
+            <textarea th:field="*{songsAsString}"></textarea>
+            <!-- Display validation errors for songsAsString -->
+            <span th:if="${#fields.hasErrors('songsAsString')}" th:errors="*{songsAsString}"></span>
+        </div>
+        <div>
+            <label>Proof (Image or PDF):</label>
+            <input type="file" th:field="*{proofFile}" />
+            <!-- Display validation errors for proofFile -->
+            <span th:if="${#fields.hasErrors('proofFile')}" th:errors="*{proofFile}"></span>
+        </div>
+        <div>
+            <button type="submit">Add Setlist</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+
+<head>
+    <title>Show Details</title>
+</head>
+
+<body>
+    <h1>Show Details</h1>
+    <p>Artist: <a th:href="@{/artists/{id}(id=${show.artist.id})}" th:text="${show.artist.name}"></a></p>
+    <p>Date: <span th:text="${show.date}"></span></p>
+    <p>Venue: <span th:text="${show.venue}"></span></p>
+    <p>City: <span th:text="${show.city}"></span></p>
+    <p>Country: <span th:text="${show.country}"></span></p>
+
+    <h2>Setlist</h2>
+    <div th:if="${setlist != null}">
+        <h3>Songs:</h3>
+        <ol>
+            <li th:each="song : ${setlist.songs}" th:text="${song}"></li>
+        </ol>
+
+        <!-- Tombol Edit hanya untuk pengguna yang login -->
+        <div sec:authorize="isAuthenticated()">
+            <a th:href="@{/setlists/{id}(id=${setlist.id})}">Setlist Detail</a>
+        </div>
+    </div>
+    <div th:if="${setlist == null}">
+        <p>No setlist available for this show.</p>
+        <!-- Tambahkan tombol Add Setlist -->
+        <div sec:authorize="isAuthenticated()">
+            <a th:href="@{/setlists/add(showId=${show.id})}" class="btn btn-primary">Add Setlist</a>
+        </div>
+    </div>
+</body>
+
+</html>
