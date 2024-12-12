@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Head Content -->
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Home</a></li>
+            <li><a th:href="@{/search}">Search</a></li>
+            
+            <!-- Admin Links -->
+            <li th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+                <a th:href="@{/admin}">Admin Dashboard</a>
+            </li>
+            
+            <!-- Authentication Links -->
+            <li th:if="${#authorization.expression('isAnonymous()')}">
+                <a th:href="@{/login}">Login</a>
+            </li>
+            <li th:if="${#authorization.expression('isAuthenticated()')}">
+                <a th:href="@{/logout}">Logout</a>
+            </li>
+        </ul>
+    </nav>
+    
+    <!-- Page Content -->
+    <div th:fragment="content">
+        <!-- Content Goes Here -->
+    </div>
+</body>
+</html>
