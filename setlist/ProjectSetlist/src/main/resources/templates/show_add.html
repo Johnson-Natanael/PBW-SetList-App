@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Show</title>
+    <!-- Include CSS files -->
+</head>
+<body>
+    <h1>Add New Show for <span th:text="${show.artist.name}"></span></h1>
+    <form th:action="@{/shows/add}" th:object="${show}" method="post">
+        <!-- CSRF Token -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+        <!-- Hidden field for artist -->
+        <input type="hidden" th:field="*{artist.id}" />
+
+        <div>
+            <label>Date:</label>
+            <input type="date" th:field="*{date}" />
+            <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+        </div>
+        <div>
+            <label>Venue:</label>
+            <input type="text" th:field="*{venue}" />
+            <span th:if="${#fields.hasErrors('venue')}" th:errors="*{venue}"></span>
+        </div>
+        <div>
+            <label>City:</label>
+            <input type="text" th:field="*{city}" />
+        </div>
+        <div>
+            <label>Country:</label>
+            <input type="text" th:field="*{country}" />
+        </div>
+        <div>
+            <button type="submit">Add Show</button>
+        </div>
+    </form>
+</body>
+</html>

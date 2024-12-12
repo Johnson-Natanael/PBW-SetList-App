@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Artists</title>
+    <!-- Include CSS files -->
+</head>
+<body>
+    <h1>Artists</h1>
+    
+    <!-- Tombol Add Artist -->
+    <div>
+        <a th:href="@{/artists/add}" class="btn btn-primary">Add Artist</a>
+    </div>
+    
+    <ul>
+        <li th:each="artist : ${artists}">
+            <a th:href="@{/artists/{id}(id=${artist.id})}" th:text="${artist.name}"></a>
+        </li>
+    </ul>
+</body>
+</html>
