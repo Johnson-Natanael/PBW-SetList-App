@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Setlist Details</title>
+    <!-- Include CSS files -->
+</head>
+<body>
+    <h1>Setlist for Show on <span th:text="${setlist.show != null ? setlist.show.date : 'Unknown Date'}"></span></h1>
+    <h2>Songs:</h2>
+    <div th:if="${setlist.songs != null}">
+        <ol>
+            <li th:each="song : ${setlist.songs}" th:text="${song}"></li>
+        </ol>
+    </div>
+    <div th:if="${setlist.songs == null}">
+        <p>No songs available.</p>
+    </div>
+
+    <!-- Proof Section -->
+    <div th:if="${setlist.proofFilename != null}">
+        <h3>Proof:</h3>
+        <div th:with="ext=${#strings.toLowerCase(#strings.substring(setlist.proofFilename, setlist.proofFilename.lastIndexOf('.') + 1))}">
+            <div th:switch="${ext}">
+                <div th:case="'jpg'">
+                    <img th:src="@{'/uploads/proofs/' + ${setlist.proofFilename}}" alt="Proof Image" />
+                </div>
+                <div th:case="'jpeg'">
+                    <img th:src="@{'/uploads/proofs/' + ${setlist.proofFilename}}" alt="Proof Image" />
+                </div>
+                <div th:case="'png'">
+                    <img th:src="@{'/uploads/proofs/' + ${setlist.proofFilename}}" alt="Proof Image" />
+                </div>
+                <div th:case="'gif'">
+                    <img th:src="@{'/uploads/proofs/' + ${setlist.proofFilename}}" alt="Proof Image" />
+                </div>
+                <div th:case="'pdf'">
+                    <a th:href="@{'/uploads/proofs/' + ${setlist.proofFilename}}" target="_blank">View PDF</a>
+                </div>
+                <div th:case="*">
+                    <a th:href="@{'/uploads/proofs/' + ${setlist.proofFilename}}" target="_blank">Download Proof</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comments Section -->
+    <h3>Comments</h3>
+    <div th:if="${#lists.isEmpty(comments)}">
+        <p>No comments yet. Be the first to comment!</p>
+    </div>
+    <ul th:each="comment : ${comments}">
+        <li>
+            <strong th:text="${comment.user.username} + ' (' + ${comment.createdAt} + ')'"></strong><br/>
+            <p th:text="${comment.content}"></p>
+        </li>
+    </ul>
+
+    <!-- Add Comment Form -->
+    <div th:if="${#authentication.principal != null}">
+        <h3>Add a Comment</h3>
+        <form th:action="@{'/setlists/' + ${setlist.id} + '/comments'}" method="post">
+            <!-- CSRF Token -->
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+            <div>
+                <label>Comment:</label>
+                <textarea name="content" placeholder="Enter your comment here"></textarea>
+            </div>
+            <div>
+                <button type="submit">Submit Comment</button>
+            </div>
+        </form>
+    </div>
+    <div th:if="${#authentication.principal == null}">
+        <p><a th:href="@{/login}">Login</a> to add a comment.</p>
+    </div>
+</body>
+</html>
