@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Reports</title>
+    <link rel="stylesheet" href="/css/admin-reports.css"> <!-- Link ke CSS eksternal -->
+</head>
+<body>
+    <div class="navbar">
+        <h1>Admin Reports</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/admin}">Back to Dashboard</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="report-section">
+        <h2>Number of Users by Role</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Role</th>
+                    <th>Number of Users</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="report : ${roleReports}">
+                    <td th:text="${report.roleName}">ROLE_USER</td>
+                    <td th:text="${report.userCount}">10</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
