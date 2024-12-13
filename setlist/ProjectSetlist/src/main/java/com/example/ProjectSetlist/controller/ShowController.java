@@ -23,8 +23,33 @@ public class ShowController {
     private ShowRepository showRepository;
 
     @Autowired
+    private ArtistRepository artistRepository;
+
+    @Autowired
     private SetlistRepository setlistRepository;
 
+
+    @GetMapping("/add")
+    public String showAddShowForm(@RequestParam("artistId") Long artistId, Model model) {
+        Artist artist = artistRepository.findById(artistId).orElse(null);
+        if (artist == null) {
+            return "redirect:/artists";
+        }
+        Show show = new Show();
+        show.setArtist(artist);
+        model.addAttribute("show", show);
+        return "show_add";
+    }
+
+    @PostMapping("/add")
+    public String addShow(@Valid @ModelAttribute("show") Show show, BindingResult result) {
+        if (result.hasErrors()) {
+            return "show_add";  // Kembali ke form jika terdapat error
+        }
+        showRepository.save(show);
+        return "redirect:/artists/" + show.getArtist().getId();
+    }
+    
     @GetMapping("/{id}")
     public String viewShow(@PathVariable("id") Long id, Model model) {
         Show show = showRepository.findById(id).orElse(null);

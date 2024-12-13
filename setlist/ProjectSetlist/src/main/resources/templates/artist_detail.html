@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${artist.name}">Artist Detail</title>
+    <!-- Include CSS files -->
+</head>
+<body>
+    <h1 th:text="${artist.name}"></h1>
+    <p th:text="${artist.description}"></p>
+    
+    <!-- Display the uploaded image -->
+    <div th:if="${artist.imageFilename}">
+        <img th:src="@{'/uploads/artists/' + ${artist.imageFilename}}" alt="Artist Image" />
+    </div>
+    
+    <!-- Link back to artist list -->
+    <p><a th:href="@{/artists}">Back to Artists</a></p>
+        <!-- Existing content -->
+
+    <h2>Shows</h2>
+    <ul>
+        <li th:each="show : ${artist.shows}">
+            <a th:href="@{/shows/{id}(id=${show.id})}" th:text="${show.date} + ' - ' + ${show.venue}"></a>
+        </li>
+    </ul>
+
+    <!-- Add Show button for authenticated users -->
+    <div sec:authorize="isAuthenticated()">
+        <a th:href="@{/shows/add(artistId=${artist.id})}">Add New Show</a>
+    </div>
+</body>
+</html>
