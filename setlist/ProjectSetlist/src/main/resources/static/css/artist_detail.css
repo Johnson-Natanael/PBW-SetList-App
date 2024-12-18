@@ -1,0 +1,92 @@
+/* Parent Container (Background Hitam) */
+.artist-background {
+    background-color: rgb(29, 5, 5); /* Latar belakang */
+    display: flex; /* Flexbox aktif */
+    flex-direction: column; /* Tata letak vertikal */
+    justify-content: space-between; /* Jarak antara elemen atas dan bawah */
+    align-items: flex-start; /* Rata kiri */
+    height: 350px; /* Tinggi container */
+    padding: 20px; /* Jarak dari tepi */
+    box-sizing: border-box; /* Padding dihitung di dalam elemen */
+}
+
+
+.artist-background > h1 {
+    color: rgb(29, 5, 5);
+    font-size: 30px; /* Ukuran font */
+    margin: 0; /* Hilangkan margin default */
+}
+
+.artist-container {
+    display: flex; /* Flexbox */
+    flex-direction: column; /* Susun vertikal */
+    gap: 10px;
+}
+
+
+.artist-image {
+    width: 250px; /* Ukuran gambar */
+    height: 150px; /* Menjaga proporsi */
+    margin-bottom: 10px; /* Jarak antara gambar dan nama */
+    border: 2px solid white; /* Bingkai putih */
+    border-radius: 5px; /* Sudut melengkung */
+}
+
+
+.artist-name h1 {
+    color: white; /* Warna teks */
+    font-size: 60px; /* Ukuran teks */
+    margin: 0; /* Hilangkan margin */
+}
+
+
+/* Artist Details Container */
+.artist-details {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Left Side: Shows */
+.left-container {
+    width: 50%;
+}
+
+.left-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.left-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.left-container ul li {
+    margin: 10px 0;
+}
+
+/* Right Side: Description */
+.right-container {
+    width: 50%;
+}
+
+.right-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.right-container p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Additional styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+

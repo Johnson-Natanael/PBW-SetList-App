@@ -2,27 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title th:text="${artist.name}">Artist Detail</title>
-    <!-- Include CSS files -->
+    <link rel="stylesheet" href="/css/artist_detail.css">
 </head>
 <body>
-    <h1 th:text="${artist.name}"></h1>
-    <p th:text="${artist.description}"></p>
-    
-    <!-- Display the uploaded image -->
-    <div th:if="${artist.imageFilename}">
-        <img th:src="@{'/uploads/artists/' + ${artist.imageFilename}}" alt="Artist Image" />
+    <!-- Artist Name Inside Background Image -->
+    <div class="artist-background">
+        <h1>Artist's Detail</h1>
+        <div class="artist-container">
+            <img th:src="@{'/uploads/artists/' + ${artist.imageFilename}}" alt="Artist Image" class="artist-image">
+            <div class="artist-name">
+                <h1 th:text="${artist.name}"></h1>
+            </div>
+        </div>
     </div>
     
+    
+    <!-- Artist Details Container -->
+    <div class="artist-details">
+        <div class="left-container">
+            <h2>Shows</h2>
+            <ul>
+                <li th:each="show : ${artist.shows}">
+                    <a th:href="@{/shows/{id}(id=${show.id})}" th:text="${show.date} + ' - ' + ${show.venue}"></a>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="right-container">
+            <h2>Description</h2>
+            <p th:text="${artist.description}"></p>
+        </div>
+    </div>
+
     <!-- Link back to artist list -->
     <p><a th:href="@{/artists}">Back to Artists</a></p>
-        <!-- Existing content -->
-
-    <h2>Shows</h2>
-    <ul>
-        <li th:each="show : ${artist.shows}">
-            <a th:href="@{/shows/{id}(id=${show.id})}" th:text="${show.date} + ' - ' + ${show.venue}"></a>
-        </li>
-    </ul>
 
     <!-- Add Show button for authenticated users -->
     <div sec:authorize="isAuthenticated()">

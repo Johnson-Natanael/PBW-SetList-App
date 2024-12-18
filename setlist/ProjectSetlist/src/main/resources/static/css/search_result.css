@@ -1,0 +1,211 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Hero Section */
+.hero {
+    background: url('/images/img2.jpg') no-repeat center center/cover;
+    height: 70vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.navbar .menu a, .auth-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+}
+
+.navbar p{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.menu{
+    padding-left: 20px;
+}
+
+.navbar .auth-links .btn {
+    background: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: background 0.3s;
+}
+
+.navbar .auth-links .btn:hover {
+    background: #3a7dc9;
+}
+
+.hero-content {
+    text-align: center;
+    margin: auto 0;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.search-form input {
+    padding: 0.8rem;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+}
+
+.search-form button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-form button:hover {
+    background: #3a7dc9;
+}
+
+
+/* Container utama */
+.search-results-container {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem auto;
+    max-width: 1200px;
+}
+
+/* Filter Section */
+.filter-section {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter-section h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.filter-form label {
+    display: block;
+    margin: 0.5rem 0 0.3rem;
+    color: #555;
+}
+
+.filter-form input,
+.filter-form select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.btn-filter {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #5ea0ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-filter:hover {
+    background-color: #3a7dc9;
+}
+
+/* Results Section */
+.results-section {
+    flex: 3;
+}
+
+.shows-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.show-card {
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.show-link {
+    display: block;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+}
+
+.show-info {
+    padding: 1rem;
+    text-align: center;
+}
+
+.show-info h3 {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.show-info p {
+    font-size: 0.9rem;
+    color: #777;
+    margin : 0;
+}
+
+/* Footer */
+footer {
+    background-color: #333; /* Warna gelap untuk footer */
+    color: white; /* Warna teks */
+    text-align: center; /* Posisi teks di tengah */
+    padding: 15px 20px;
+    font-size: 0.9rem;
+    margin-top: auto; /* Footer tetap di bawah */
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+footer a {
+    color: #ffa500; /* Warna tautan */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #fff; /* Warna saat hover */
+    text-decoration: underline;
+}
