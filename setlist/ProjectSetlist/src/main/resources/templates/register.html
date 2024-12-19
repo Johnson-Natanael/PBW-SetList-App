@@ -1,32 +1,65 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
 <head>
     <title>Register</title>
-    <!-- Include CSS files -->
+    <link rel="stylesheet" href="/css/register.css" />
 </head>
 <body>
-    <h1>Register</h1>
-    <form th:action="@{/register}" th:object="${user}" method="post">
-        <div>
-            <label>Username:</label>
-            <input type="text" th:field="*{username}" />
-            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
-            <span th:text="${usernameError}"></span>
-        </div>
-        <div>
-            <label>Email:</label>
-            <input type="email" th:field="*{email}" />
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-        </div>
-        <div>
-            <label>Password:</label>
-            <input type="password" th:field="*{password}" />
-            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
-        </div>
-        <div>
-            <button type="submit">Register</button>
-        </div>
-    </form>
-    <p>Already have an account? <a th:href="@{/login}">Login here</a>.</p>
+    <!-- Navbar -->
+    <nav>
+        <ul class="navbar">
+            <li><p>Setlist.fm</p></li>
+            <li class="center">
+                <a th:href="@{/}" >Home</a>
+                <a th:href="@{/artists}" sec:authorize="isAuthenticated()">Artists</a>
+            </li>
+            <li class="right">
+                <div sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}">Logout</a>
+                </div>
+                <div sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/login}">Login</a>
+                    <a th:href="@{/register}" class="active">Register</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Kontainer utama -->
+    <div class="container">
+        <h1>Register</h1>
+        <form th:action="@{/register}" th:object="${user}" method="post">
+            <div>
+                <label>Username:</label>
+                <input type="text" th:field="*{username}" />
+                <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                <span th:text="${usernameError}"></span>
+            </div>
+            <div>
+                <label>Email:</label>
+                <input type="email" th:field="*{email}" />
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input type="password" th:field="*{password}" />
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </div>
+            <div>
+                <button type="submit">Register</button>
+            </div>
+        </form>
+        <p>Already have an account? <a th:href="@{/login}">Login here</a>.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Setlist.fm. All rights reserved.</p>
+        <p>
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms of Service</a> | 
+            <a href="#">Contact Us</a>
+        </p>
+    </footer>
 </body>
 </html>

@@ -38,7 +38,7 @@ public class SecurityConfig {
         http
             .authenticationProvider(authenticationProvider())
             .authorizeHttpRequests((authz) -> authz
-                .requestMatchers("/", "/register", "/login", "/search", "/css/**", "/js/**").permitAll()
+                .requestMatchers("/", "/register", "/login", "/search/**", "/css/**", "/js/**", "/images/**", "/uploads/artists/**", "/artists/**").permitAll()
                 .requestMatchers("/shows/**").permitAll() // Public access untuk semua endpoint show
                 .requestMatchers("/setlists/**").authenticated() // Hanya pengguna login yang bisa mengakses setlist
                 .requestMatchers("/admin/**").hasRole("ADMIN")
