@@ -44,7 +44,7 @@ public class ShowController {
     @PostMapping("/add")
     public String addShow(@Valid @ModelAttribute("show") Show show, BindingResult result) {
         if (result.hasErrors()) {
-            return "show_add";  // Kembali ke form jika terdapat error
+            return "show_add";
         }
         showRepository.save(show);
         return "redirect:/artists/" + show.getArtist().getId();
@@ -54,10 +54,9 @@ public class ShowController {
     public String viewShow(@PathVariable("id") Long id, Model model) {
         Show show = showRepository.findById(id).orElse(null);
         if (show == null) {
-            return "redirect:/"; // Redirect jika show tidak ditemukan
+            return "redirect:/"; 
         }
 
-        // Muat setlist terkait dengan show
         Setlist setlist = setlistRepository.findByShowId(id);
         model.addAttribute("show", show);
         model.addAttribute("setlist", setlist);

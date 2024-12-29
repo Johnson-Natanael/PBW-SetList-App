@@ -30,7 +30,7 @@ public class Setlist {
     @Column(name = "song")
     private List<String> songs;
 
-    // // Transient field for songs input
+    // Transient field for songs input
     @Transient
     // @NotBlank(message = "Songs are required")
     private String songsAsString;

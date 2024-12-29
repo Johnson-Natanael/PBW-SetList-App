@@ -16,6 +16,13 @@
         <p>No songs available.</p>
     </div>
 
+    <!-- Edit Button -->
+    <div>
+        <a th:href="@{'/setlists/' + ${setlist.id} + '/edit'}">
+            <button>Edit Setlist</button>
+        </a>
+    </div>
+
     <!-- Proof Section -->
     <div th:if="${setlist.proofFilename != null}">
         <h3>Proof:</h3>

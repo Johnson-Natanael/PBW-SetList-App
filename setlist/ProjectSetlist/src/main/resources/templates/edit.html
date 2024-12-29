@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Setlist</title>
+</head>
+<body>
+    <h1>Edit Setlist for Show on <span th:text="${setlist.show != null ? setlist.show.date : 'Unknown Date'}"></span></h1>
+
+    <!-- Form untuk user melakukan perubahan -->
+    <form th:action="@{'/setlists/' +${setlist.id}+ '/update'}" method="post">
+        <h2>Edit Songs:</h2>
+        <div>
+            <ol>
+                <!-- Input untuk setiap lagu -->
+                <li th:each="song, iterStat : ${setlist.songs}">
+                    <input type="text" th:name="'songs[]'" th:value="${song}" />
+                </li>
+            </ol>
+        </div>
+    
+        <div>
+            <!-- Tombol untuk menambah lagu baru -->
+            <button type="button" onclick="addSong()">Add New Song</button>
+        </div>
+    
+        <div>
+            <label for="description">Change Description:</label>
+            <textarea id="description" name="description" required></textarea>
+        </div>
+    
+        <div>
+            <!-- Tombol untuk menyimpan perubahan -->
+            <button type="submit">Submit Changes</button>
+        </div>
+    </form>
+    
+
+    <!-- Bagian untuk admin menyetujui/menolak perubahan -->
+    <div sec:authorize="hasRole('ADMIN')">
+        <h2>Pending Changes</h2>
+        <div th:if="${#lists.isEmpty(pendingChanges)}">
+            <p>No pending changes.</p>
+        </div>
+        <ul th:each="change : ${pendingChanges}">
+            <li>
+                <p><strong>Change ID:</strong> <span th:text="${change.id}"></span></p>
+                <p><strong>Description:</strong> <span th:text="${change.description}"></span></p>
+                <p><strong>Proposed Songs:</strong></p>
+                <ul>
+                    <li th:each="song : ${change.proposedSongs}" th:text="${song}"></li>
+                </ul>
+                <form th:action="@{'/changes/' +${change.id}+ '/approve'}" method="post" style="display:inline;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit">Approve</button>
+                </form>
+                <form th:action="@{'/changes/' +${change.id}+ '/reject'}" method="post" style="display:inline;">
+                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                    <button type="submit">Reject</button>
+                </form>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        // Fungsi untuk menambahkan input lagu baru
+        function addSong() {
+            const ol = document.querySelector('ol');
+            const li = document.createElement('li');
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.name = 'songs[]'; 
+            input.placeholder = 'Enter new song'; 
+            li.appendChild(input);
+            ol.appendChild(li);
+        }
+    </script>
+</body>
+</html>

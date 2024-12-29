@@ -5,8 +5,25 @@ import com.example.ProjectSetlist.model.User;
 import com.example.ProjectSetlist.repository.RoleRepository;
 import com.example.ProjectSetlist.repository.UserRepository;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.data.category.DefaultCategoryDataset;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import javax.imageio.ImageIO;
+
+import com.lowagie.text.*;
+import com.lowagie.text.pdf.PdfWriter;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,13 +51,13 @@ public class AdminController {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    // 2.1.1. Show Admin Dashboard
+    //Show Admin Dashboard
     @GetMapping
     public String adminDashboard() {
         return "admin/dashboard";
     }
 
-    // 2.1.2. List All Users
+    //List All Users
     @GetMapping("/users")
     public String listUsers(@RequestParam(value = "message", required = false) String message, Model model) {
         List<User> users = userRepository.findAll();
@@ -54,7 +71,7 @@ public class AdminController {
     }
     
 
-    // 2.1.3. Show Create User Form
+    //Show Create User Form
     @GetMapping("/users/create")
     public String showCreateUserForm(Model model) {
         model.addAttribute("user", new User());
@@ -63,7 +80,7 @@ public class AdminController {
         return "admin/create_user";
     }
 
-    // 2.1.4. Handle Create User
+    //Handle Create User
     @PostMapping("/users/create")
     public String createUser(@Valid @ModelAttribute("user") User user,
                              BindingResult result,
@@ -75,7 +92,7 @@ public class AdminController {
             return "admin/create_user";
         }
       
-        // Encrypt the password
+        // Encrypt password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         // Assign roles
@@ -87,7 +104,6 @@ public class AdminController {
         return "redirect:/admin/users";
     }
 
-    // 2.1.5. Show Edit User Form
     @GetMapping("/users/edit/{id}")
     public String showEditUserForm(@PathVariable("id") Long id, Model model) {
         Optional<User> userOpt = userRepository.findById(id);
@@ -128,17 +144,15 @@ public class AdminController {
 
         userRepository.save(existingUser);  // Simpan perubahan ke database
 
-        return "redirect:/admin/users";  // Redirect setelah sukses
+        return "redirect:/admin/users";  
     }
 
-    // 2.1.7. Delete User
     @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userRepository.deleteById(id);
         return "redirect:/admin/users";
     }
 
-    // 2.2.1. Show Reports Page
     @GetMapping("/reports")
     public String showReports(Model model) {
         // Example Report: Number of Users by Role
@@ -152,7 +166,56 @@ public class AdminController {
         return "admin/reports";
     }
 
-    // DTO for Reports
+    @GetMapping("/reports/pdf")
+    public ResponseEntity<byte[]> generatePdfReport() throws Exception {
+        // Ambil data dari database (jumlah user berdasarkan tanggal registrasi)
+        List<User> users = userRepository.findAll();
+        Map<String, Long> userRegistrations = users.stream()
+                .collect(Collectors.groupingBy(
+                        user -> user.getRegisteredAt().toLocalDate().toString(),
+                        Collectors.counting()
+                ));
+
+        // Buat grafik menggunakan JFreeChart
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        userRegistrations.forEach((date, count) -> dataset.addValue(count, "Users", date));
+        JFreeChart chart = ChartFactory.createLineChart(
+                "User Registrations Over Time",
+                "Date",
+                "Number of Users",
+                dataset
+        );
+
+        // Konversi grafik menjadi BufferedImage
+        BufferedImage chartImage = chart.createBufferedImage(600, 400);
+
+        // Buat PDF menggunakan iText
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        Document document = new Document();
+        PdfWriter.getInstance(document, baos);
+        document.open();
+
+        // Tambahkan judul ke PDF
+        Font titleFont = new Font(Font.HELVETICA, 16, Font.BOLD);
+        document.add(new Paragraph("User Registration Report", titleFont));
+        document.add(new Paragraph(" ")); // Spasi kosong
+
+        // Tambahkan grafik ke PDF
+        Image pdfChart = Image.getInstance(chartImage, null);
+        pdfChart.setAlignment(Image.ALIGN_CENTER);
+        document.add(pdfChart);
+
+        document.close();
+
+        // Kembalikan PDF sebagai respons
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "UserRegistrationReport.pdf");
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(baos.toByteArray());
+    }
+
     public static class RoleReport {
         private String roleName;
         private long userCount;
