@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .requestMatchers("/", "/register", "/login", "/search/**", "/css/**", "/js/**", "/images/**", "/uploads/artists/**", "/artists/**").permitAll()
                 .requestMatchers("/shows/**").permitAll() // Public access untuk semua endpoint show
                 .requestMatchers("/setlists/**").authenticated() // Hanya pengguna login yang bisa mengakses setlist
-                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/admin/**", "/changes/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )
             .formLogin((form) -> form

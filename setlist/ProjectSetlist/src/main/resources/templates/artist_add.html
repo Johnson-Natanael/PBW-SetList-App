@@ -3,12 +3,10 @@
       xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
 <head>
     <title>Add Artist</title>
-    <!-- Include CSS files -->
 </head>
 <body>
     <h1>Add New Artist</h1>
     <form th:action="@{/artists/add}" th:object="${artist}" method="post" enctype="multipart/form-data">
-        <!-- CSRF Token -->
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         
         <div>

@@ -4,6 +4,7 @@ import com.example.ProjectSetlist.model.Setlist;
 import com.example.ProjectSetlist.model.Show;
 import com.example.ProjectSetlist.model.Comment;
 import com.example.ProjectSetlist.model.User;
+import com.example.ProjectSetlist.model.Change;
 import com.example.ProjectSetlist.repository.ChangeRepository;
 import com.example.ProjectSetlist.repository.CommentRepository;
 import com.example.ProjectSetlist.repository.SetlistRepository;
@@ -168,5 +169,77 @@ public class SetlistController {
         Files.copy(proofFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         return filename;
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editSetlist(@PathVariable Long id, Model model) {
+        Setlist setlist = setlistRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Setlist not found"));
+    
+        List<Change> pendingChanges = changeRepository.findBySetlistIdAndStatus(id, "Pending");
+    
+        model.addAttribute("setlist", setlist);
+        model.addAttribute("pendingChanges", pendingChanges);
+    
+        return "edit";
+    }
+    
+
+    @PostMapping("/{id}/update")
+    public String updateSetlist(@PathVariable Long id, 
+                                @RequestParam List<String> songs, 
+                                @RequestParam String description, 
+                                Authentication authentication) {
+                                    
+        System.out.println("Received description: " + description); 
+        System.out.println("Received songs: " + songs);      
+        System.out.println("Received description: " + description);        
+
+        Setlist setlist = setlistRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Setlist not found"));
+    
+        User user = userRepository.findByUsername(authentication.getName())
+                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+    
+        Change change = new Change();
+        change.setSetlist(setlist);
+        change.setUser(user);
+        change.setDescription(description);
+        change.setProposedSongs(songs);
+        change.setTimestamp(LocalDateTime.now());
+        change.setStatus("Pending");
+        changeRepository.save(change);
+    
+        return "redirect:/setlists/" + id;
+    }
+    
+    @PostMapping("/changes/{changeId}/approve")
+    public String approveChange(@PathVariable Long changeId) {
+        System.out.println("HALOOOOOOO");
+        Change change = changeRepository.findById(changeId)
+                .orElseThrow(() -> new IllegalArgumentException("Change not found"));
+
+        // Update setlist dengan proposed songs
+        Setlist setlist = change.getSetlist();
+        setlist.setSongs(change.getProposedSongs());
+        setlistRepository.save(setlist);
+
+        // Update change status
+        change.setStatus("Approved");
+        changeRepository.save(change);
+
+        return "redirect:/setlists/" + setlist.getId();
+    }
+
+    @PostMapping("/changes/{changeId}/reject")
+    public String rejectChange(@PathVariable Long changeId) {
+        Change change = changeRepository.findById(changeId)
+                .orElseThrow(() -> new IllegalArgumentException("Change not found"));
+
+        // Update change status
+        change.setStatus("Rejected");
+        changeRepository.save(change);
+
+        return "redirect:/setlists/" + change.getSetlist().getId();
     }
 }
