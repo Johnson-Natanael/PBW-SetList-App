@@ -1,0 +1,143 @@
+/* Show Background (similar to artist background) */
+.show-background {
+    background-size: auto;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.show-background-blur {
+    position: absolute;
+    top: 0;
+    left: -25px;
+    width: 150%;
+    height: 480px;
+    filter: blur(15px) brightness(0.4);
+    background-color: transparent;
+    background-clip: content-box;
+    border: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.logo {
+    color: white;
+    padding-left: 30px;
+}
+
+.navbar .menu a, .auth-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+}
+
+.navbar p {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.menu {
+    padding-left: 20px;
+}
+
+.navbar .auth-links .btn {
+    background: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: background 0.3s;
+}
+
+.navbar .auth-links .btn:hover {
+    background: #3a7dc9;
+}
+
+.show-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 50px;
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.show-details h1, .show-details p {
+    color: white;
+    margin: 5px 0;
+}
+
+.setlist-wrapper {
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    gap: 30px;
+    padding: 20px;
+    margin-top: 100px;
+}
+
+.setlist-container h2 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    color: #333;
+    font-weight: bold;
+}
+
+.setlist-container ol {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.setlist-container ol li {
+    margin: 12px 0;
+    font-size: 1.1rem;
+    color: #555;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.setlist-container ol li:hover {
+    color: #007BFF;
+    cursor: pointer;
+}
+
+.authenticated-section a {
+    display: inline-block;
+    padding: 10px 20px;
+    color: white;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.authenticated-section a:hover {
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
