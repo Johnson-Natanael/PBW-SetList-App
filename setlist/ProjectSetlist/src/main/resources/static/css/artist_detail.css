@@ -31,8 +31,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     background: rgba(0, 0, 0, 0.6);
     position: relative;
     z-index: 2;
@@ -81,7 +81,7 @@
 .artist-container {
     display: flex;
     flex-direction: column;
-    padding-left: 590px;
+    padding-left: 24vw; /* 10% dari lebar layar */
     gap: 10px;
     position: relative;
     z-index: 2;
@@ -110,9 +110,11 @@
     display: flex;
     justify-content: center;
     align-items:flex-start;
-    background-color: #f4f4f4; 
+    background-color: #f1f1f1; 
     border-radius: 8px;
     gap: 30px;
+    margin-top: 40px;
+    padding-bottom: 30px;
 }
 
 /* .artist-details {
@@ -129,13 +131,24 @@
 } */
 
 .left-container {
-    width: 20%; 
-    background-color: #f4f4f4;
+    padding-top: 5px;
+    padding-left: 25px;
+    padding-bottom: 25px;
+    padding-right: 25px;
+    width: 18%; 
+    background-color:white;
+    border-radius: 10px;
 }
 
 .right-container{
+    padding-top: 5px;
+    padding-left: 25px;
+    padding-bottom: 25px;
+    padding-right: 25px;
     width: 30%;
-    background-color: #f4f4f4;
+    background-color:white;
+    border-radius: 10px;
+
 }
 
 /* Left Side: Shows */
@@ -144,6 +157,8 @@
     margin-bottom: 15px;
     color: #333;
     font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bbbbbb;
 }
 
 .left-container ul {
@@ -171,6 +186,8 @@
     margin-bottom: 15px;
     color: #333; 
     font-weight: bold;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #bbbbbb;
 }
 
 .right-container p {
@@ -181,7 +198,6 @@
     margin-bottom: 15px;
 }
 .authenticated-section {
-    background-color: #f4f4f4;
     padding-top: 15px;
 }
 
@@ -212,13 +228,13 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0; 
+    background-color: #f1f1f1; 
 }
 
 
 a {
-    color: #007BFF; 
     text-decoration: none;
+    color: #007BFF; 
     transition: color 0.3s ease;
 }
 

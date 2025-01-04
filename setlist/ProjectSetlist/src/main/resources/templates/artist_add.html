@@ -3,30 +3,71 @@
       xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
 <head>
     <title>Add Artist</title>
+    <link rel="stylesheet" href="/css/add_artist.css" />
 </head>
 <body>
-    <h1>Add New Artist</h1>
-    <form th:action="@{/artists/add}" th:object="${artist}" method="post" enctype="multipart/form-data">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-        
-        <div>
-            <label>Name:</label>
-            <input type="text" th:field="*{name}" />
-            <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    <div class="hero">
+        <nav class="navbar">
+            <div class="logo">
+                <p>Setlist.fm</p>
+            </div>
+            <div class="menu">
+                <a th:href="@{/}" class="active">Home</a>
+                <a th:href="@{/artists}">Artists</a>
+                <a href="#">Profile</a>
+            </div>
+            <div class="auth-links">
+                <div sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}" class="btn">Logout</a>
+                </div>
+                <div sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/login}" class="btn">Login</a>
+                    <a th:href="@{/register}" class="btn">Register</a>
+                </div>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Discover Amazing Shows</h1>
+            <p>Plan your perfect concert experience with Setlist.fm</p>
+            <form th:action="@{/search/result}" method="get" class="search-form">
+                <input type="text" name="query" placeholder="Search for artists, shows, setlists" required />
+                <button type="submit">Search</button>
+            </form>
         </div>
-        <div>
-            <label>Description:</label>
-            <textarea th:field="*{description}"></textarea>
-            <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+    </div>
+    <div class="outer-container">
+        <div class="inner-container">
+            <h1>Add New Artist</h1>
+            <p>Fill all the information below to add new artist!</p>
+            <form th:action="@{/artists/add}" th:object="${artist}" method="post" enctype="multipart/form-data">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <div class="input-container">
+                        <i class="icon fa fa-user"></i>
+                        <input type="text" id="name" th:field="*{name}" />
+                    </div>
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" th:field="*{description}"></textarea>
+                    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                </div>
+                <div class="form-group">
+                    <label for="imageFile">Image</label>
+                    <div class="input-container">
+                        <i class="icon fa fa-image"></i>
+                        <input type="file" id="imageFile" th:field="*{imageFile}" />
+                    </div>
+                    <span th:if="${#fields.hasErrors('imageFile')}" th:errors="*{imageFile}"></span>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn-submit">Add Artist</button>
+                </div>
+            </form>
         </div>
-        <div>
-            <label>Image:</label>
-            <input type="file" th:field="*{imageFile}" />
-            <span th:if="${#fields.hasErrors('imageFile')}" th:errors="*{imageFile}"></span>
-        </div>
-        <div>
-            <button type="submit">Add Artist</button>
-        </div>
-    </form>
+    </div>    
 </body>
 </html>

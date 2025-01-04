@@ -97,15 +97,16 @@
 }
 
 .add-artist-btn .btn {
-    background-color: #ff6a00;
+    background-color: black;
     color: white;
     padding: 10px 20px;
     font-size: 1.2em;
     text-decoration: none;
+    border-radius: 5px;
 }
 
 .add-artist-btn .btn:hover {
-    background-color: #ffb200;
+    background-color: rgb(43, 101, 226);
 }
 
 /* Artists Section */
