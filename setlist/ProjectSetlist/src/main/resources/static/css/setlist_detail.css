@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-bottom: 1%;
+    flex: 1;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.logo{
+    color: white;
+    padding-left: 30px;
+}
+
+.navbar .menu a, .auth-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+}
+
+.navbar p{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.menu{
+    padding-left: 20px;
+}
+
+.navbar .auth-links .btn {
+    background: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: background 0.3s;
+}
+
+.navbar .auth-links .btn:hover {
+    background: #3a7dc9;
+}
+
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.footer-content p{
+    margin: 0;
+}
+
+.footer-content .links a {
+    color: #5ea0ff;
+    text-decoration: none;
+    margin: 0 0.5rem;
+}
+
+.footer-content .links a:hover {
+    text-decoration: underline;
+}
+
+.song-name {
+    max-width: 100%;
+    word-wrap: break-word;
+}
+
+.comment-content {
+    max-width: 100%; 
+    word-wrap: break-word;
+}
+
+#commentLabel {
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+#commentArea {
+    resize: none;
+    overflow: hidden;
+    width: 100%;
+    height: auto;
+    min-height: 20px;
+    padding: 5px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#commentSubmit {
+    /* display: inline-block;  */
+    margin-left: auto; 
+    margin-top: 8px;
+    float: right;
+}
