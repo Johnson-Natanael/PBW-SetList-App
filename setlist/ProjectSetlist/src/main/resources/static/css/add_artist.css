@@ -1,0 +1,216 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Hero Section */
+.hero {
+    background: url('/images/img2.jpg') no-repeat center center/cover;
+    height: 70vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.navbar .menu a, .auth-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+}
+
+.navbar p{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.menu{
+    padding-left: 20px;
+}
+
+.navbar .auth-links .btn {
+    background: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: background 0.3s;
+}
+
+.navbar .auth-links .btn:hover {
+    background: #3a7dc9;
+}
+
+.hero-content {
+    text-align: center;
+    margin: auto 0;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.search-form input {
+    padding: 0.8rem;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+}
+
+.search-form button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-form button:hover {
+    background: #3a7dc9;
+}
+
+/* Add artist section */
+.outer-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin-top: 40px;
+    margin-bottom: 30px;
+    background-color: #f8f9fa;
+}
+
+.inner-container {
+    width: 900px;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    font-family: Arial, sans-serif;
+}
+
+.inner-container h1 {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgb(158, 158, 158);
+    color: #333333;
+    font-size: 1.8em;
+}
+
+.inner-container p {
+    padding-bottom: 20px;
+    color: #333333;
+    font-size: 18px;
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 18px;
+    padding-bottom: 5px;
+    color: #3a7dc9;
+}
+
+
+.input-container {
+    position: relative;
+}
+
+.input-container input,
+.input-container textarea {
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    border-radius: 5px;
+    font-size: 1em;
+    color: rgb(113, 113, 126);
+    font-size: 22px;
+    padding-left: 7px;
+}
+
+.input-container textarea {
+    height: 100px;
+    resize: none;
+}
+
+.form-group #description {
+    width: 100%;
+    height: 100px;
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #cccccc;
+    color: rgb(113, 113, 126);
+    padding-left: 7px;
+    resize: none;
+}
+
+
+.input-container .icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #aaaaaa;
+}
+
+.btn-submit {
+    display: block;
+    width: 25%;
+    padding: 10px 20px;
+    background-color: black;
+    border: none;
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+}
+
+.form-group span {
+    display: block;
+    margin-top: 5px;
+    color: #ff4d4d;
+    font-size: 0.9em;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .inner-container {
+        width: 90%;
+        padding: 20px;
+    }
+}

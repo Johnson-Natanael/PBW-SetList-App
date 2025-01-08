@@ -8,12 +8,12 @@ body {
 
 h1 {
     font-size: 2rem;
-    color: #333;
+    color: white;
 }
 
 /* Navbar Styling */
 .navbar {
-    background-color: #4CAF50;
+    background-color: black;
     color: white;
     padding: 20px;
     text-align: center;
@@ -40,7 +40,7 @@ h1 {
 }
 
 .navbar nav ul li a:hover {
-    background-color: #45a049;
+    background-color: rgb(76, 76, 245);
 }
 
 /* Alert Message */
@@ -53,11 +53,17 @@ h1 {
     border: 1px solid #d6e9c6;
 }
 
-/* Table Styling */
+.table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
 table {
-    width: 100%;
+    width: 70%;
     border-collapse: collapse;
-    margin-top: 30px;
+    margin: 0 auto;
     background-color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -70,8 +76,10 @@ th, td {
 }
 
 th {
-    background-color: #4CAF50;
-    color: white;
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    padding: 15px;
 }
 
 tr:hover {
@@ -91,7 +99,7 @@ tr:hover {
 }
 
 .btn-edit {
-    background-color: #4CAF50;
+    background-color: #58855a;
 }
 
 .btn-edit:hover {
@@ -99,7 +107,7 @@ tr:hover {
 }
 
 .btn-delete {
-    background-color: #f44336;
+    background-color: #d66f67;
 }
 
 .btn-delete:hover {
