@@ -16,8 +16,8 @@
 .artist-background-blur {
     position: absolute;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: -25px;
+    width: 102%;
     height: 480px;
     background: url('path/to/image.jpg') no-repeat center center;
     background-size: cover;
@@ -31,8 +31,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     background: rgba(0, 0, 0, 0.6);
     position: relative;
     z-index: 2;
