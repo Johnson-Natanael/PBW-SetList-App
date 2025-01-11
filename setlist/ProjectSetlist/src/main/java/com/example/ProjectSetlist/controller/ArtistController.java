@@ -55,9 +55,14 @@ public class ArtistController {
     @PostMapping("/add")
     public String addArtist(@Valid @ModelAttribute("artist") Artist artist, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            System.out.println("Errors occurred:");
+            result.getAllErrors().forEach(error -> {
+                System.out.println("Object: " + error.getObjectName());
+                System.out.println("Code: " + error.getCode());
+                System.out.println("Message: " + error.getDefaultMessage());
+            });
             return "artist_add";
         }
-    
         try {
             // Handle file upload
             if (artist.getImageFile() != null && !artist.getImageFile().isEmpty()) {

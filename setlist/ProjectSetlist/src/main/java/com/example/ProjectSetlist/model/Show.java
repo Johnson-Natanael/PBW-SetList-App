@@ -1,6 +1,7 @@
 package com.example.ProjectSetlist.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,10 +26,13 @@ public class Show {
     @NotNull(message = "Date is required")
     private LocalDate date;
 
-    @NotNull(message = "Venue is required")
+    @NotBlank(message = "Venue is required")
     private String venue;
 
+    @NotBlank(message = "City is required")
     private String city;
+
+    @NotBlank(message = "Country is required")
     private String country;
 
     // Reference to the associated setlist

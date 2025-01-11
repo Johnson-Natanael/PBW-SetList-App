@@ -1,0 +1,150 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Hero Section */
+.hero {
+    background: url('/images/img2.jpg') no-repeat center center/cover;
+    height: 70vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.navbar .menu a, .auth-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+}
+
+.navbar p{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.menu{
+    padding-left: 20px;
+}
+
+.navbar .auth-links .btn {
+    background: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: background 0.3s;
+}
+
+.navbar .auth-links .btn:hover {
+    background: #3a7dc9;
+}
+
+.hero-content {
+    text-align: center;
+    margin: auto 0;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.search-form input {
+    padding: 0.8rem;
+    width: 300px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 0.5rem;
+}
+
+.search-form button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.search-form button:hover {
+    background: #3a7dc9;
+}
+
+/* Styling About Us */
+.about-us-content {
+    padding: 50px 20px;
+    background-color: white; 
+}
+
+.about-us-content .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: white; 
+    padding: 30px;
+}
+
+.about-us-content h2 {
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.about-us-content p {
+    font-size: 20px;
+    line-height: 1.6;
+    color: #555;
+}
+
+.about-us-content h3 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    color: #333333;
+}
+
+.about-us-content ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.about-us-content ul li {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.about-us-content ul li strong {
+    font-weight: bold;
+    color: #000;
+}
+
+.about-us-content a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.about-us-content a:hover {
+    text-decoration: underline;
+}

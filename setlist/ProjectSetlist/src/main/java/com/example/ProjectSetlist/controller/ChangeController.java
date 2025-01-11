@@ -26,11 +26,9 @@ public class ChangeController {
 
     @PostMapping("/{changeId}/approve")
     public String approveChange(@PathVariable Long changeId) {
-        // Ambil perubahan berdasarkan ID
         Change change = changeRepository.findById(changeId)
                 .orElseThrow(() -> new IllegalArgumentException("Change not found"));
         
-        // Debug: Log daftar lagu yang diusulkan
         System.out.println("Proposed songs for change ID " + changeId + ":");
         if (change.getProposedSongs() != null && !change.getProposedSongs().isEmpty()) {
             change.getProposedSongs().forEach(song -> System.out.println("- " + song));
@@ -38,22 +36,20 @@ public class ChangeController {
             System.out.println("No proposed songs.");
         }
         
-        // Update setlist dengan lagu yang diusulkan
         Setlist setlist = change.getSetlist();
 
-        setlist.getSongs().clear();  // Bersihkan lagu lama
-        setlist.getSongs().addAll(change.getProposedSongs());  // Tambahkan lagu baru
+        setlist.getSongs().clear();
+        setlist.getSongs().addAll(change.getProposedSongs()); 
         
         System.out.println("Updated setlist songs: " + setlist.getSongs());
         
-        // Simpan setlist setelah update koleksi lagu
-        setlistRepository.save(setlist);  // Memastikan perubahan disimpan
+        setlistRepository.save(setlist);  
         
         // Update status change
         change.setStatus("Approved");
-        changeRepository.save(change);  // Memastikan status perubahan disimpan
+        changeRepository.save(change);  
         
-        return "redirect:/setlists/" + setlist.getId();
+        return "redirect:/shows/" + setlist.getShow().getId();
     }
     
     
@@ -61,11 +57,16 @@ public class ChangeController {
     public String rejectChange(@PathVariable Long changeId) {
         Change change = changeRepository.findById(changeId)
                 .orElseThrow(() -> new IllegalArgumentException("Change not found"));
-
-        // Update status change
+    
+        Setlist setlist = change.getSetlist();
+        if (setlist == null) {
+            throw new IllegalStateException("Setlist not found for the given change.");
+        }
+    
         change.setStatus("Rejected");
         changeRepository.save(change);
 
-        return "redirect:/setlists/" + change.getSetlist().getId();
+        return "redirect:/shows/" + setlist.getShow().getId();
     }
+    
 }

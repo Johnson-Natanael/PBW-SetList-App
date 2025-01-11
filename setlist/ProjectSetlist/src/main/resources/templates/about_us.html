@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security6">
+<head>
+    <title>Add Artist</title>
+    <link rel="stylesheet" href="/css/about_us.css" />
+</head>
+<body>
+    <div class="hero">
+        <nav class="navbar">
+            <div class="logo">
+                <p>Setlist.fm</p>
+            </div>
+            <div class="menu">
+                <a th:href="@{/}" class="active">Home</a>
+                <a th:href="@{/artists}">Artists</a>
+                <a th:href="@{/aboutus}">About Us</a>
+            </div>
+            <div class="auth-links">
+                <div sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}" class="btn">Logout</a>
+                </div>
+                <div sec:authorize="!isAuthenticated()">
+                    <a th:href="@{/login}" class="btn">Login</a>
+                    <a th:href="@{/register}" class="btn">Register</a>
+                </div>
+            </div>
+        </nav>
+        <div class="hero-content">
+            <h1>Discover Amazing Shows</h1>
+            <p>Plan your perfect concert experience with Setlist.fm</p>
+            <form th:action="@{/search/result}" method="get" class="search-form">
+                <input type="text" name="query" placeholder="Search for artists, shows, setlists" required />
+                <button type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="about-us-content">
+        <div class="container">
+            <h2>Welcome to Setlist.fm</h2>
+            <p>Welcome to Setlist.fm, your ultimate companion for discovering and exploring music setlists from all your favorite live performances!</p>
+    
+            <p>At Setlist.fm, we believe that live music experiences are among the most magical moments in the world of music. Our mission is to connect fans with their favorite artists and the unforgettable experiences they create on stage. Whether you're reliving an incredible night or planning to see your favorite band live, Setlist.fm is here to enhance your journey through the world of live music.</p>
+    
+            <h3>What We Offer:</h3>
+            <ul>
+                <li><strong>Comprehensive Setlist Database:</strong> Dive into a vast archive of setlists from concerts, festivals, and tours by artists across all genres. Discover what songs were played, how shows evolved, and more.</li>
+                <li><strong>User-Generated Content:</strong> Share your own experiences by submitting setlists from the concerts you attend. Every contribution helps build a richer, more vibrant community.</li>
+                <li><strong>Live Show Updates:</strong> Stay in the know with real-time updates on current and past tours. Whether it's your favorite band or a new discovery, Setlist.fm keeps you informed.</li>
+                <li><strong>Community Interaction:</strong> Connect with fellow music lovers through discussions, stories, and recommendations. Be part of a global network united by the love of live music.</li>
+                <li><strong>Personalized Experience:</strong> Create your own account to save favorite setlists, artists, and shows. Receive notifications about upcoming tours and performances tailored to your preferences.</li>
+            </ul>
+    
+            <h3>Our Vision</h3>
+            <p>At Setlist.fm, we envision a world where fans and artists are more connected than ever. We aim to preserve the magic of live performances by creating a living history of concerts that spans generations. Every setlist tells a story, and we’re here to make sure those stories are never forgotten.</p>
+    
+            <h3>How You Can Contribute</h3>
+            <p>Setlist.fm thrives on community participation. Here’s how you can get involved:</p>
+            <ul>
+                <li>Submit setlists from concerts you’ve attended to help expand our database.</li>
+                <li>Review and edit existing setlists to ensure accuracy and completeness.</li>
+                <li>Engage with other users by sharing your stories, reviews, and favorite moments from live performances.</li>
+            </ul>
+    
+            <h3>Join Us on This Journey</h3>
+            <p>Music brings people together, and live performances are the heartbeat of this connection. At Setlist.fm, we are proud to celebrate and share the joy of live music with fans around the world. Whether you're here to reminisce about the past, stay updated on the present, or plan for the future, Setlist.fm is your trusted companion.</p>
+    
+            <p>Thank you for being a part of our journey. Together, let’s make live music history accessible and unforgettable for everyone.</p>
+        </div>
+    </div>
+    
+    
+
+</body>

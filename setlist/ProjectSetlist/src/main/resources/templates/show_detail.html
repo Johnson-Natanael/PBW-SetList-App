@@ -7,11 +7,10 @@
 </head>
 
 <body>
-    <div class="show-background">
-        <div class="show-background-blur" 
+    <div class="artist-background">
+        <div class="artist-background-blur" 
             th:style="'background-image: url(/uploads/artists/' + ${show.artist.imageFilename} + ');'">
         </div>
-        
         <nav class="navbar">
             <div class="logo">
                 <p>Setlist.fm</p>
@@ -19,7 +18,7 @@
             <div class="menu">
                 <a th:href="@{/}" class="active">Home</a>
                 <a th:href="@{/artists}">Artists</a>
-                <a href="#">Profile</a>
+                <a th:href="@{/aboutus}">About Us</a>
             </div>
             <div class="auth-links">
                 <div sec:authorize="isAuthenticated()">
@@ -31,40 +30,130 @@
                 </div>
             </div>
         </nav>
+        <div class="artist-container">
+            <img th:src="@{'/uploads/artists/' + ${show.artist.imageFilename}}" alt="Artist Image" class="artist-image">
+            <div class="artist-name">
+                <h1 th:text="${show.artist.name}"></h1>
+            </div>
+        </div>
+    </div>
 
+    <div class="show-page-wrapper">
         <div class="show-container">
             <div class="show-details">
-                <h1>Show Details</h1>
-                <p>Artist: <a th:href="@{/artists/{id}(id=${show.artist.id})}" th:text="${show.artist.name}"></a></p>
+                <h2>Show Details</h2>
                 <p>Date: <span th:text="${show.date}"></span></p>
                 <p>Venue: <span th:text="${show.venue}"></span></p>
                 <p>City: <span th:text="${show.city}"></span></p>
                 <p>Country: <span th:text="${show.country}"></span></p>
             </div>
         </div>
-    </div>
-
-    <div class="setlist-wrapper">
-        <div class="setlist-container">
-            <h2>SETLIST</h2>
-            <div th:if="${setlist != null}">
-                <h3>Songs:</h3>
-                <ol>
-                    <li th:each="song : ${setlist.songs}" th:text="${song}"></li>
-                </ol>
-
-                <div sec:authorize="isAuthenticated()">
-                    <a th:href="@{/setlists/{id}(id=${setlist.id})}" class="btn">Setlist Detail</a>
+    
+        <div class="setlist-wrapper">
+            <div class="setlist-container">
+                <h2>SETLIST</h2>
+                <div th:if="${setlist != null}">
+                    <ol>
+                        <li th:each="song, stat : ${setlist.songs}">
+                            <div class="song-item">
+                                <span th:text="${stat.count} + '. ' + ${song}"></span>
+                                <a th:href="'https://www.youtube.com/results?search_query=' + ${song}" class="play-button" target="_blank">Play It</a>
+                            </div>
+                        </li>
+                    </ol>                                     
+                    <div sec:authorize="isAuthenticated()">
+                        <a th:href="@{'/setlists/' + ${setlist.id} + '/edit'}">Edit Setlist</a>
+                    </div>
                 </div>
-            </div>
-            <div th:if="${setlist == null}">
-                <p>No setlist available for this show.</p>
-                <div sec:authorize="isAuthenticated()">
-                    <a th:href="@{/setlists/add(showId=${show.id})}" class="btn btn-primary">Add Setlist</a>
+                <div th:if="${setlist == null}">
+                    <p>No setlist available for this show.</p>
+                    <div sec:authorize="isAuthenticated()">
+                        <a th:href="@{/setlists/add(showId=${show.id})}" class="btn btn-primary">Add Setlist</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
+    <div th:if="${setlist != null}" class="proof-section">
+        <div th:if="${setlist.proofFilename != null}" class="proof-container">
+            <div class="proof-file">
+                <div th:with="ext=${#strings.toLowerCase(#strings.substring(setlist.proofFilename, setlist.proofFilename.lastIndexOf('.') + 1))}" class="proof-image-container">
+                    <div th:switch="${ext}" class="proof-type-switch">
+                        <div th:case="'jpg'" class="proof-img">
+                            <img th:src="@{'/uploads/proofs/' + ${setlist.proofFilename}}" alt="Proof Image" class="proof-img" />
+                        </div>
+                        <div th:case="'jpeg'" class="proof-img">
+                            <img th:src="@{'/uploads/proofs/' + ${setlist.proofFilename}}" alt="Proof Image" class="proof-img" />
+                        </div>
+                        <div th:case="'png'" class="proof-img">
+                            <img th:src="@{'/uploads/proofs/' + ${setlist.proofFilename}}" alt="Proof Image" class="proof-img" />
+                        </div>
+                        <div th:case="'gif'" class="proof-img">
+                            <img th:src="@{'/uploads/proofs/' + ${setlist.proofFilename}}" alt="Proof Image" class="proof-img" />
+                        </div>
+                        <div th:case="'pdf'" class="proof-link">
+                            <a th:href="@{'/uploads/proofs/' + ${setlist.proofFilename}}" target="_blank">View PDF</a>
+                        </div>
+                        <div th:case="*" class="proof-link">
+                            <a th:href="@{'/uploads/proofs/' + ${setlist.proofFilename}}" target="_blank">Download Proof</a>
+                        </div>
+                    </div>
+                    <h3>A Proof that The Creator has Gone To The Show</h3>
+                </div>
+            </div>
+        </div>
+    
+        <div class="outer-wrapper-1">
+            <div class="outer-wrapper-2">
+                <div class="outer-wrapper-3">
+                    <h3 class="comments-title">Comments</h3>
+                    <div th:if="${#lists.isEmpty(comments)}" class="no-comments">
+                        <p>No comments yet. Be the first to comment!</p>
+                    </div>
+                    <div>
+                        <ul th:each="comment : ${comments}" class="comments-list">
+                            <li class="comment-item">
+                                <strong th:text="${comment.user.username} + ' (' + ${comment.createdAt} + ')'" class="comment-author"></strong><br />
+                                <p th:text="${comment.content}" class="comment-content"></p>
+                            </li>
+                        </ul>
+                    </div>
+        
+                    <!-- Add Comment Form -->
+                    <div th:if="${#authentication.principal != null}" class="add-comment-form">
+                        <h3 class="add-comment-title">Add a Comment</h3>
+                        <form th:action="@{'/shows/' + ${show.id} + '/comments'}" method="post" class="comment-form">
+                            <!-- CSRF Token -->
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                            <div class="form-group">
+                                <textarea id="commentArea" name="content" class="comment-textarea" placeholder="Enter your comment here"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn" style="background-color: black;" disabled>Submit Comment</button>
+                        </form>                                            
+                    </div>
+                    <div th:if="${#authentication.principal == null}" class="login-prompt">
+                        <p><a th:href="@{/login}" class="login-link">Login</a> to add a comment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Fungsi untuk memvalidasi input komentar
+            document.getElementById('commentArea').addEventListener('input', function() {
+                var commentContent = document.getElementById('commentArea').value.trim();  // Ambil nilai textarea
+                var submitButton = document.querySelector('.submit-btn');  // Ambil tombol submit
+        
+                if (commentContent === "") {
+                    // Jika komentar kosong, beri gaya hitam dan nonaktifkan tombol
+                    submitButton.style.backgroundColor = "black";
+                    submitButton.disabled = true;
+                } else {
+                    // Jika ada komentar, kembalikan gaya normal dan aktifkan tombol
+                    submitButton.style.backgroundColor = ""; // Reset warna tombol
+                    submitButton.disabled = false;
+                }
+            });
+        </script>        
+</body>
 </html>
