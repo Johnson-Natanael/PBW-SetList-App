@@ -51,8 +51,27 @@
             </div>
         </div>
     </section>
-    
 
+    <!-- Pagination Section -->
+    <div class="pagination">
+        <!-- Previous Button -->
+        <a th:href="@{/artists(page=${currentPage - 1}, size=3)}"
+           th:classappend="${currentPage == 0} ? 'disabled'"
+           th:if="${currentPage > 0}">&laquo; Previous</a>
+    
+        <!-- Page Numbers -->
+        <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a th:href="@{/artists(page=${i}, size=3)}"
+               th:classappend="${i == currentPage} ? 'active'" 
+               th:text="${i + 1}"></a>
+        </span>
+    
+        <!-- Next Button -->
+        <a th:href="@{/artists(page=${currentPage + 1}, size=3)}"
+           th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'"
+           th:if="${currentPage + 1 < totalPages}">Next &raquo;</a>
+    </div>
+    
     <!-- Add Artist Button (only visible for authenticated users) -->
     <div sec:authorize="isAuthenticated()" class="add-artist-btn">
         <a th:href="@{/artists/add}" class="btn btn-primary">Add Artist</a>
