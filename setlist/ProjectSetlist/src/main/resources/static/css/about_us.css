@@ -3,7 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Hero Section */
@@ -25,6 +25,16 @@
     background: rgba(0, 0, 0, 0.6);
 }
 
+.navbar .menu a {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.navbar .menu a:hover {
+    background: #3a7dc9;
+}
+
 .navbar .menu a, .auth-links a {
     color: #fff;
     text-decoration: none;
@@ -34,6 +44,10 @@
 .navbar p{
     font-size: 30px;
     font-weight: bold;
+}
+
+.logo {
+    margin-left: 16px;
 }
 
 .menu{

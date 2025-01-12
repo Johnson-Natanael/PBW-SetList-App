@@ -1,9 +1,9 @@
-body {
+/* General Reset */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Hero Section */
@@ -20,8 +20,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 40px;
+    padding-bottom: 40px;
     background: rgba(0, 0, 0, 0.6);
 }
 
@@ -36,8 +36,22 @@ body {
     font-weight: bold;
 }
 
+.logo {
+    margin-left: 16px;
+}
+
 .menu{
     padding-left: 20px;
+}
+
+.navbar .menu a {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.navbar .menu a:hover {
+    background: #3a7dc9;
 }
 
 .navbar .auth-links .btn {
@@ -96,8 +110,7 @@ body {
     align-items: center;
     height: 100%;
     width: 100%;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    padding: 40px;
     background-color: #f8f9fa;
 }
 
