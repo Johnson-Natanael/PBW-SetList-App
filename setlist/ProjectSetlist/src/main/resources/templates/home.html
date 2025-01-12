@@ -14,7 +14,7 @@
             <div class="menu">
                 <a th:href="@{/}" class="active">Home</a>
                 <a th:href="@{/artists}">Artists</a>
-                <a href="#">Profile</a>
+                <a th:href="@{/aboutus}">About Us</a>
             </div>
             <div class="auth-links">
                 <div sec:authorize="isAuthenticated()">
@@ -52,17 +52,5 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2024 Setlist.fm. All rights reserved.</p>
-            <div class="links">
-                <a href="#">Privacy Policy</a> | 
-                <a href="#">Terms of Service</a> | 
-                <a href="#">Contact Us</a>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

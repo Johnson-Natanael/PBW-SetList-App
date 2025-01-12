@@ -1,0 +1,260 @@
+/* Navbar dan Background */
+.artist-background {
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 490px;
+    padding: 20px;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.artist-background-blur {
+    position: absolute;
+    top: 0;
+    left: -25px;
+    width: 102%;
+    height: 480px;
+    background: url('path/to/image.jpg') no-repeat center center;
+    background-size: cover;
+    filter: blur(15px) brightness(0.4);
+    background-color: transparent;
+    background-clip: content-box; 
+    border: none;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.logo{
+    color: white;
+    padding-left: 30px;
+}
+
+.navbar .menu a, .auth-links a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 1rem;
+}
+
+.navbar p{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.menu{
+    padding-left: 20px;
+}
+
+.navbar .auth-links .btn {
+    background: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    color: white;
+    transition: background 0.3s;
+}
+
+.navbar .auth-links .btn:hover {
+    background: #3a7dc9;
+}
+
+.artist-background h3{
+    margin-top: 0;
+    position: relative;
+    z-index: 2;
+}
+
+.artist-container {
+    display: flex;
+    flex-direction: column;
+    padding-left: 24vw; /* 10% dari lebar layar */
+    gap: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+
+.artist-image {
+    width: 250px;
+    height: 150px;
+    border-radius: 10px; 
+    border: 1px solid gainsboro;
+    margin-bottom: 20px;
+}
+
+
+.artist-name h1 {
+    color: white; 
+    font-size: 60px;
+    margin: 0; 
+    padding-bottom: 40px;
+}
+
+
+/* Main Content */
+.edit-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.songs-list ol {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.song-item {
+    margin-bottom: 10px;
+}
+
+.song-input {
+    width: 90%;
+    padding: 10px;
+    font-size: 1em;
+    border: 0px;
+    border-bottom: 1px solid black;
+}
+
+.add-song-btn button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.add-song-btn button:hover {
+    background-color: #2980b9;
+}
+
+.description-section {
+    margin-bottom: 20px;
+}
+
+.description-label {
+    font-size: 1.2em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.description-textarea {
+    width: 80%;
+    padding: 10px;
+    height: 100px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.submit-btn button {
+    width: 100%;
+    background-color: #3498db;
+    color: #fff;
+    padding: 12px;
+
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.submit-btn button:hover {
+    background-color: #2980b9;
+}
+
+li input[type="text"] {
+    border: 0;
+    border-bottom: 1px solid black;
+    padding: 6px;
+    font-size: 17px;
+    width: 90%;
+}
+
+.edited-song {
+    background-color: #7f8c8d;
+}
+
+
+/* Admin Section */
+.admin-section {
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.pending-changes-title {
+    color: #e74c3c;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.no-pending-changes {
+    font-style: italic;
+    color: #7f8c8d;
+    text-align: center;
+}
+
+.changes-list {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.change-item {
+    background-color: #ecf0f1;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
+.proposed-songs-list {
+    list-style: none;
+    padding-left: 20px;
+}
+
+.proposed-song-item {
+    margin-bottom: 5px;
+}
+
+/* Buttons in Admin Section */
+.approve-btn, .reject-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.approve-btn:hover, .reject-btn:hover {
+    background-color: #2980b9;
+}

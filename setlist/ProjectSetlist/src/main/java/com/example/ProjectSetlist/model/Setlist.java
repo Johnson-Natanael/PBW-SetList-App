@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "setlists")
@@ -23,7 +24,6 @@ public class Setlist {
     @JoinColumn(name = "show_id", nullable = false)
     private Show show;
 
-    // Remove the @NotNull annotation here
     // @NotNull(message = "Songs are required")
     @ElementCollection
     @CollectionTable(name = "setlist_songs", joinColumns = @JoinColumn(name = "setlist_id"))

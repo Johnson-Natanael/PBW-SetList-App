@@ -14,7 +14,7 @@
             <div class="menu">
                 <a th:href="@{/}" class="active">Home</a>
                 <a th:href="@{/artists}">Artists</a>
-                <a href="#">Profile</a>
+                <a th:href="@{/aboutus}">About Us</a>
             </div>
             <div class="auth-links">
                 <div sec:authorize="isAuthenticated()">
@@ -37,67 +37,58 @@
     </div>
 
 <!-- Search Results Section -->
-<div class="search-results-container">
-    <!-- Filter Section -->
-    <aside class="filter-section">
-        <h3>Filter Results</h3>
-        <form th:action="@{/search/result}" method="get" class="filter-form">
-            <input type="hidden" name="query" th:value="${query}" />
-        
-            <!-- Artist Filter -->
-            <label for="artist">Artist</label>
-            <select name="artist" id="artist">
-                <option value="">All Artists</option>
-                <option th:each="artist : ${artists}" th:value="${artist}" th:text="${artist}"></option>
-            </select>
-        
-            <!-- Country Filter -->
-            <label for="country">Country</label>
-            <select name="country" id="country">
-                <option value="">All Countries</option>
-                <option th:each="country : ${countries}" th:value="${country}" th:text="${country}"></option>
-            </select>
-        
-            <!-- Year Filter -->
-            <label for="year">Year</label>
-            <select name="year" id="year">
-                <option value="">All Years</option>
-                <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
-            </select>
-        
-            <button type="submit" class="btn-filter">Apply Filters</button>
-        </form>
-    </aside>
+    <div class="search-results-container">
+        <!-- Filter Section -->
+        <aside class="filter-section">
+            <h3>Filter Results</h3>
+            <form th:action="@{/search/result}" method="get" class="filter-form">
+                <input type="hidden" name="query" th:value="${query}" />
+            
+                <!-- Artist Filter -->
+                <label for="artist">Artist</label>
+                <select name="artist" id="artist">
+                    <option value="">All Artists</option>
+                    <option th:each="artist : ${artists}" th:value="${artist}" th:text="${artist}"></option>
+                </select>
+            
+                <!-- Country Filter -->
+                <label for="country">Country</label>
+                <select name="country" id="country">
+                    <option value="">All Countries</option>
+                    <option th:each="country : ${countries}" th:value="${country}" th:text="${country}"></option>
+                </select>
+            
+                <!-- Year Filter -->
+                <label for="year">Year</label>
+                <select name="year" id="year">
+                    <option value="">All Years</option>
+                    <option th:each="year : ${years}" th:value="${year}" th:text="${year}"></option>
+                </select>
+            
+                <button type="submit" class="btn-filter">Apply Filters</button>
+            </form>
+        </aside>
 
-    <!-- Results Section -->
-    <section class="results-section">
-        <h2>Search Results</h2>
-        <div th:if="${#lists.isEmpty(shows)}">
-            <p>No results found.</p>
-        </div>
-        <div class="shows-container" th:unless="${#lists.isEmpty(shows)}">
-            <div class="show-card" th:each="show : ${shows}">
-                <p th:text="${show.date}" id="date"></p>
-                <a th:href="@{/shows/{id}(id=${show.id})}" class="show-link"
-                   th:style="'background-image: url(/uploads/artists/' + ${show.artist.imageFilename} + ');'">
-                </a>
-                <div class="show-info">
-                    <h3 th:text="${show.artist.name}"></h3>
-                    <p th:text="${show.venue}"></p>
-                    <p th:text="${show.city + ', ' + show.country}"></p>
+        <!-- Results Section -->
+        <section class="results-section">
+            <h2>Search Results</h2>
+            <div th:if="${#lists.isEmpty(shows)}">
+                <p>No results found.</p>
+            </div>
+            <div class="shows-container" th:unless="${#lists.isEmpty(shows)}">
+                <div class="show-card" th:each="show : ${shows}">
+                    <p th:text="${show.date}" id="date"></p>
+                    <a th:href="@{/shows/{id}(id=${show.id})}" class="show-link"
+                    th:style="'background-image: url(/uploads/artists/' + ${show.artist.imageFilename} + ');'">
+                    </a>
+                    <div class="show-info">
+                        <h3 th:text="${show.artist.name}"></h3>
+                        <p th:text="${show.venue}"></p>
+                        <p th:text="${show.city + ', ' + show.country}"></p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-</div>
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Setlist.fm. All rights reserved.</p>
-        <p>
-            <a href="#">Privacy Policy</a> | 
-            <a href="#">Terms of Service</a> | 
-            <a href="#">Contact Us</a>
-        </p>
-    </footer>
+        </section>
+    </div>
 </body>
 </html>

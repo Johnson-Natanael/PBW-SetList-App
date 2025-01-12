@@ -1,4 +1,4 @@
-/* Parent Container (Background Hitam) */
+/* Navbar dan Background */
 .artist-background {
     background-size: cover;
     background-position: center;
@@ -105,11 +105,10 @@
 }
 
 
-
+/* Main Content */
 .artist-details-wrapper {
     display: flex;
     justify-content: center;
-    align-items:flex-start;
     background-color: #f1f1f1; 
     border-radius: 8px;
     gap: 30px;
@@ -138,6 +137,7 @@
     width: 18%; 
     background-color:white;
     border-radius: 10px;
+    height: fit-content;
 }
 
 .right-container{
@@ -148,7 +148,7 @@
     width: 30%;
     background-color:white;
     border-radius: 10px;
-
+    height: fit-content;
 }
 
 /* Left Side: Shows */
@@ -178,6 +178,10 @@
 .left-container ul li:hover {
     color: #007BFF; 
     cursor: pointer;
+}
+
+.left-container ul li a:hover{
+    color: #074c96; 
 }
 
 /* Right Side: Description */
@@ -216,7 +220,8 @@
 }
 
 .authenticated-section a:hover {
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2); /* Tingkatkan bayangan */
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+    background-color: #0056b3;
     transform: translateY(-2px); 
 }
 
@@ -224,6 +229,8 @@
     transform: translateY(2px); 
 }
 
+
+/* All */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -236,10 +243,6 @@ a {
     text-decoration: none;
     color: #007BFF; 
     transition: color 0.3s ease;
-}
-
-a:hover {
-    color: #0056b3; 
 }
 
 

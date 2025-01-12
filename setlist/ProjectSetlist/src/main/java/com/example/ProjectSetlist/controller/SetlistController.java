@@ -4,6 +4,7 @@ import com.example.ProjectSetlist.model.Setlist;
 import com.example.ProjectSetlist.model.Show;
 import com.example.ProjectSetlist.model.Comment;
 import com.example.ProjectSetlist.model.User;
+import com.example.ProjectSetlist.model.Artist;
 import com.example.ProjectSetlist.model.Change;
 import com.example.ProjectSetlist.repository.ChangeRepository;
 import com.example.ProjectSetlist.repository.CommentRepository;
@@ -49,13 +50,18 @@ public class SetlistController {
     public String showAddSetlistForm(@RequestParam("showId") Long showId, Model model) {
         Show show = showRepository.findById(showId).orElse(null);
         if (show == null) {
-            return "redirect:/shows";
+            return "redirect:/shows"; // Redirect jika show tidak ditemukan
         }
+    
         Setlist setlist = new Setlist();
         setlist.setShow(show);
+    
         model.addAttribute("setlist", setlist);
+        model.addAttribute("artist", show.getArtist());
+    
         return "setlist_add";
     }
+    
 
     @PostMapping("/add")
     public String addSetlist(@Valid @ModelAttribute("setlist") Setlist setlist, BindingResult result, Model model) {
@@ -105,9 +111,15 @@ public class SetlistController {
             return "redirect:/shows";
         }
 
+        // Akses artist dari show yang terkait dengan setlist
+        Artist artist = setlist.getShow().getArtist();
+
+        // Ambil komentar untuk setlist
         List<Comment> comments = commentRepository.findBySetlistIdOrderByCreatedAtAsc(id);
+        
         model.addAttribute("setlist", setlist);
         model.addAttribute("comments", comments);
+        model.addAttribute("artist", artist); // Tambahkan artist ke model
 
         if (authentication != null) {
             model.addAttribute("newComment", new Comment());
@@ -116,35 +128,6 @@ public class SetlistController {
         return "setlist_detail";
     }
 
-    @PostMapping("/{id}/comments")
-    public String addComment(@PathVariable("id") Long setlistId,
-                             Authentication authentication,
-                             @RequestParam String content,
-                             Model model) {
-        // Retrieve Setlist
-        Setlist setlist = setlistRepository.findById(setlistId)
-            .orElseThrow(() -> new IllegalArgumentException("Setlist not found"));
-        System.out.println("Setlist found: " + setlist);
-    
-        // Retrieve User
-        User currentUser = userRepository.findByUsername(authentication.getName())
-            .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        System.out.println("User found: " + currentUser);
-    
-        // Initialize Comment Object
-        Comment newComment = new Comment();
-        newComment.setContent(content);
-        newComment.setSetlist(setlist);
-        newComment.setUser(currentUser);
-        newComment.setCreatedAt(LocalDateTime.now());
-        System.out.println("New comment: " + newComment);
-    
-        // Save the Comment
-        commentRepository.save(newComment);
-        System.out.println("Saved comment: " + newComment);
-    
-        return "redirect:/setlists/" + setlistId;
-    }
 
     private String saveProof(MultipartFile proofFile) throws IOException {
         String uploadsDir = "uploads/proofs/";
@@ -175,14 +158,19 @@ public class SetlistController {
     public String editSetlist(@PathVariable Long id, Model model) {
         Setlist setlist = setlistRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Setlist not found"));
-    
+        
+        // Akses artist dari show yang terkait dengan setlist
+        Artist artist = setlist.getShow().getArtist();
+        
         List<Change> pendingChanges = changeRepository.findBySetlistIdAndStatus(id, "Pending");
-    
+        
         model.addAttribute("setlist", setlist);
         model.addAttribute("pendingChanges", pendingChanges);
-    
+        model.addAttribute("artist", artist); 
+        
         return "edit";
     }
+    
     
 
     @PostMapping("/{id}/update")
@@ -210,12 +198,11 @@ public class SetlistController {
         change.setStatus("Pending");
         changeRepository.save(change);
     
-        return "redirect:/setlists/" + id;
+        return "redirect:/shows/" + setlist.getShow().getId();
     }
     
     @PostMapping("/changes/{changeId}/approve")
     public String approveChange(@PathVariable Long changeId) {
-        System.out.println("HALOOOOOOO");
         Change change = changeRepository.findById(changeId)
                 .orElseThrow(() -> new IllegalArgumentException("Change not found"));
 
@@ -228,7 +215,7 @@ public class SetlistController {
         change.setStatus("Approved");
         changeRepository.save(change);
 
-        return "redirect:/setlists/" + setlist.getId();
+        return "redirect:/show/" + setlist.getShow().getId();
     }
 
     @PostMapping("/changes/{changeId}/reject")
