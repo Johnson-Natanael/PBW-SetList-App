@@ -319,6 +319,9 @@
     font-size: 1em;
     color: #333;
     margin-top: 5px;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 
 .add-comment-title {
@@ -349,6 +352,8 @@
     border-bottom: 1px solid #ddd;
     border-radius: 5px;
     resize: none;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .comment-textarea:focus {
