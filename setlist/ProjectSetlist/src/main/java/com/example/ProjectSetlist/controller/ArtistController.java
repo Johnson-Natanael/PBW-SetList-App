@@ -10,6 +10,9 @@ import com.example.ProjectSetlist.model.Artist;
 import com.example.ProjectSetlist.repository.ArtistRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -29,11 +32,18 @@ public class ArtistController {
     private ArtistRepository artistRepository;
 
     @GetMapping
-    public String listArtists(Model model) {
-        List<Artist> artists = artistRepository.findAll();
-        model.addAttribute("artists", artists);
-        return "artist_list";
-    }
+    public String listArtists(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "3") int size,
+        Model model) {
+    Pageable pageable = PageRequest.of(page, size);
+    Page<Artist> artistPage = artistRepository.findAll(pageable);
+
+    model.addAttribute("artists", artistPage.getContent());
+    model.addAttribute("currentPage", page);
+    model.addAttribute("totalPages", artistPage.getTotalPages());
+    return "artist_list";
+}
 
     @GetMapping("/{id}")
     public String viewArtist(@PathVariable("id") Long id, Model model) {
